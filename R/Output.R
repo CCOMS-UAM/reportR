@@ -113,6 +113,7 @@ frequencies_table <- function(.data,
   miss_cat  <- parsr::parse_string(miss_cat)
   pct_valid <- parsr::parse_bool(pct_valid)
   pct_total <- parsr::parse_bool(pct_total)
+
   if (!missing) pct_total <- FALSE # If no missing, don't compute % over total
 
   if (assertive.extra::is_not_missing(.segmentation)) {
@@ -133,6 +134,12 @@ frequencies_table <- function(.data,
   } else {
 
     .segmentation <- NULL
+  }
+
+  if (!ncol(select(.data, where(is_factor), -!!.segmentation))) {
+
+    warning("No factor variables in dataset")
+    return(NULL)
   }
 
 
