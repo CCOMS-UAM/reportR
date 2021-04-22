@@ -286,7 +286,7 @@ frequencies_table <- function(.data,
     if (pct_total) result <- rename(result, Percent = percent)
     if (pct_valid) result <- rename(result, `Percent valid` = valid_percent)
 
-    result
+    as_tibble(result)
   }
 
   result# %>%
