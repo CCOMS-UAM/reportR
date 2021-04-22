@@ -9,6 +9,7 @@ Maintainer: Daniel Morillo <danivmorillo@gmail.com>
 Description: This package provides some functions that are useful and
     straightforward for reporting research outputs in R.
 Depends:
+    R               (>= 4.0.3),
     assertive       (>= 0.3-6),
     assertive.extra (>= 0.0.0),
     dplyr           (>= 1.0.5),
