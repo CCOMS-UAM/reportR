@@ -187,7 +187,7 @@ frequencies_table <- function(.data,
         result <- janitor::adorn_totals(result)
         result <- dplyr::mutate_at(result, .y, forcats::fct_inorder)
         result <- dplyr::mutate_at(result, .y, forcats::fct_relevel, "Total")
-        result <- dplyr::arrange(result, !!rlang::sym(.y))
+        dplyr::arrange(result, !!rlang::sym(.y))
       }
 
       result <- dplyr::rename_at(result, 1, ~"Level")
@@ -203,17 +203,17 @@ frequencies_table <- function(.data,
 
           total_pcts <- if (pct_total) {
 
-            result <- janitor::adorn_percentages(result)
-            result <- janitor::adorn_pct_formatting(result, 2)
-            dplyr::rename_with(result, paste0, -Level, "_pct")
+            res <- janitor::adorn_percentages(result)
+            res <- janitor::adorn_pct_formatting(res, 2)
+            dplyr::rename_with(res, paste0, -Level, "_pct")
           }
 
           valid_pcts <- if (pct_valid) {
 
-            result <- dplyr::filter(result, Level != "(Missing)")
-            result <- janitor::adorn_percentages(result)
-            result <- janitor::adorn_pct_formatting(result, 2)
-            dplyr::rename_with(result, paste0, -Level, "_valid_pct")
+            res <- dplyr::filter(result, Level != "(Missing)")
+            res <- janitor::adorn_percentages(res)
+            res <- janitor::adorn_pct_formatting(res, 2)
+            dplyr::rename_with(res, paste0, -Level, "_valid_pct")
           }
 
           pcts <- if (pct_total & pct_valid) {
